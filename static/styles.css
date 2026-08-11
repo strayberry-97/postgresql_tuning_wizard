@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+:root {
+    --bg: #f8f7f4;
+    --bg-2: #f3ece7;
+    --text: #34383a;
+    --border: #d6d6d2;
+    --accent: #8baa20;
+
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+
+    --radius: 10px;
+
+    --font-ui: Instrument Sans, sans-serif;
+    --font-code: "JetBrains Mono", monospace;
+}
+*{
+    font-family: var(--font-ui), sans-serif;
+    color: var(--text);
+    font-size: 14px;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    align-items: center;
+    justify-content: space-between;
+}
+
+header{
+    width: min(1200px, calc(100% - 128px));
+}
+
+#Progression{
+    display: flex;
+    justify-content: space-between;
+}
+
+#Progression p{
+    margin: 0;
+    font-size: 16px;
+}
+
+#form-bg{
+    border: #34383a 1px solid;
+    border-radius: var(--radius);
+    margin: var(--space-4) 0 var(--space-2) 0;
+    background-color: var(--bg-2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+}
+
+.form-field{
+    display: flex;
+    justify-content: space-between;
+    padding-block: var(--space-1);
+    gap: var(--space-4);
+}
+
+input{
+    width: 240px;
+    border: solid 1px var(--text);
+    border-radius: 6px;
+}
+
+#submit{
+    width: 176px;
+
+}
+
+button{
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius);
+    padding-block: 4px;
+    width: 76px;
+}
+
+#form-actions{
+    display: flex;
+    align-items: flex-end;
+    margin-block-start: var(--space-2);
+    flex-direction: column
+}
+
+#connection-status {
+    margin: 8px 0 0;
+    color: var(--accent)
+}
+
+footer{
+    padding: var(--space-2) 0;
+    font-size: 12px;
+}
+
+footer p{
+    color: #8a8a86;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

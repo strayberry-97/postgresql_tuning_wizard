@@ -3,8 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>PostgreSQL Tuning Wizard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
+    <header>
+        <h1>PostgreSQL Tuning Wizard</h1>
+        <nav id="Progression">
+            <p>Connection</p>
+            <p>Query</p>
+            <p>Analysis</p>
+            <p>Recommendations</p>
+        </nav>
+    </header>
+    <main>
+        <div id="form-bg">
+            <form>
+                <div class="form-field">
+                    <label for="conn">Connection name</label>
+                    <input id="conn" type="text" required>
+                </div>
+                <div class="form-field">
+                    <label for="host">Host</label>
+                    <input id="host" type="text" required>
+                </div>
+                <div class="form-field">
+                    <label for="port">Port</label>
+                    <input id="port" required>
+                </div>
+                <div class="form-field">
+                    <label for="db">Database name</label>
+                    <input id="db" type="text" required>
+                </div>
+                <div class="form-field">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" required>
+                </div>
+                <div class="form-field">
+                    <label for="pass">Password</label>
+                    <input id="pass" type="password" required>
+                </div>
+                <div id="form-actions">
+                    <button type="submit" id="submit">Test connection</button>
+                    <p id="connection-status">✓ Connected</p>
+                </div>
+            </form>
+        </div>
+        <button type="button">Next -></button>
+    </main>
+    <footer>
+    <p>@strayberry</p>
+    </footer>
 </body>
 </html>
