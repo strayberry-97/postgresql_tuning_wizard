@@ -44,11 +44,41 @@ header{
 #Progression{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
-#Progression p{
-    margin: 0;
-    font-size: 16px;
+
+.step{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.step-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+.step.active .step-dot{
+    background: var(--accent);
+}
+
+.step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
 }
 
 #form-bg{
