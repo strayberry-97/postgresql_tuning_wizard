@@ -20,6 +20,7 @@
     font-family: var(--font-ui), sans-serif;
     color: var(--text);
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 h1{
@@ -128,9 +129,22 @@ button{
     flex-direction: column
 }
 
-#connection-status {
-    margin: 8px 0 0;
+.connection-status {
     color: var(--accent)
+}
+
+#query .connection-status::after{
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-left: 6px;
+}
+
+#form-actions .connection-status{
+    margin: 8px 0 0;
 }
 
 footer{
@@ -146,4 +160,32 @@ main{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    width: min(calc(1200px * 0.75), calc(100% - 128px));
+}
+
+#current-connection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+}
+
+#user-query{
+    height: clamp(250px, 40vh, 500px);
+    width: 100%;
+}
+
+#query{
+    width: 100%;
+}
+
+#query #navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block: var(--space-1);
+}
+
+textarea{
+    font-family: var(--font-code), monospace;
+    resize: none;
 }

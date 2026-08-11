@@ -28,39 +28,52 @@
         </nav>
     </header>
     <main>
-        <div id="form-bg">
-            <form>
-                <div class="form-field">
-                    <label for="conn">Connection name</label>
-                    <input id="conn" type="text" required>
-                </div>
-                <div class="form-field">
-                    <label for="host">Host</label>
-                    <input id="host" type="text" required>
-                </div>
-                <div class="form-field">
-                    <label for="port">Port</label>
-                    <input id="port" required>
-                </div>
-                <div class="form-field">
-                    <label for="db">Database name</label>
-                    <input id="db" type="text" required>
-                </div>
-                <div class="form-field">
-                    <label for="username">Username</label>
-                    <input id="username" type="text" required>
-                </div>
-                <div class="form-field">
-                    <label for="pass">Password</label>
-                    <input id="pass" type="password" required>
-                </div>
-                <div id="form-actions">
-                    <button type="submit" id="submit">Test connection</button>
-                    <p id="connection-status">✓ Connected</p>
-                </div>
-            </form>
-        </div>
-        <button type="button">Next -></button>
+        <section id="connection" hidden>
+            <div id="form-bg">
+                <form>
+                    <div class="form-field">
+                        <label for="conn">Connection name</label>
+                        <input id="conn" type="text" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="host">Host</label>
+                        <input id="host" type="text" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="port">Port</label>
+                        <input id="port" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="db">Database name</label>
+                        <input id="db" type="text" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="pass">Password</label>
+                        <input id="pass" type="password" required>
+                    </div>
+                    <div id="form-actions">
+                        <button type="submit" id="submit">Test connection</button>
+                        <p class="connection-status">✓ Connected</p>
+                    </div>
+                </form>
+            </div>
+            <button type="button">Next -></button>
+        </section>
+        <section id="query">
+            <div id="current-connection">
+                <p>Database: tuning_wizard_test</p>
+                <p class="connection-status">Connected</p>
+            </div>
+            <textarea id="user-query"></textarea>
+            <div id="navigation">
+                <button><- Back</button>
+                <button style="width: 88px">Analyze -></button>
+            </div>
+        </section>
     </main>
     <footer>
     <p>@strayberry</p>
