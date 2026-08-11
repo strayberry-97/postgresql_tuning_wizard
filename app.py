@@ -6,9 +6,10 @@ app = Flask(__name__)
 def wizard():
     return render_template(
         "main.html",
-        page_title = "PostgresSQL Tuning Wizard"
-
+        page_title = "PostgreSQL Tuning Wizard"
     )
 
+if __name__ == "__main__":
+    app.run(port=8000, debug=True)
 
 
