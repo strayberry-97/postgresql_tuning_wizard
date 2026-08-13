@@ -147,6 +147,12 @@ button{
     margin: 8px 0 0;
 }
 
+#connection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 footer{
     padding: var(--space-2) 0;
     font-size: 12px;
@@ -159,7 +165,7 @@ footer p{
 main{
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     width: min(calc(1200px * 0.75), calc(100% - 128px));
 }
 
@@ -188,4 +194,8 @@ main{
 textarea{
     font-family: var(--font-code), monospace;
     resize: none;
+}
+
+section[hidden] {
+    display: none !important;
 }

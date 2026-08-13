@@ -28,7 +28,7 @@
         </nav>
     </header>
     <main>
-        <section id="connection" hidden>
+        <section id="connection">
             <div id="form-bg">
                 <form>
                     <div class="form-field">
@@ -61,22 +61,25 @@
                     </div>
                 </form>
             </div>
-            <button type="button">Next -></button>
+            <button type="button" id="conn-next">Next -></button>
         </section>
-        <section id="query">
+        <section id="query" hidden>
             <div id="current-connection">
                 <p>Database: tuning_wizard_test</p>
                 <p class="connection-status">Connected</p>
             </div>
             <textarea id="user-query"></textarea>
             <div id="navigation">
-                <button><- Back</button>
-                <button style="width: 88px">Analyze -></button>
+                <button id="query-back" type="button"><- Back</button>
+                <button style="width: 88px" type="button">Analyze -></button>
             </div>
         </section>
+        <section id="analysis" hidden></section>
+        <section id="recommendations" hidden></section>
     </main>
     <footer>
     <p>@strayberry</p>
     </footer>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
