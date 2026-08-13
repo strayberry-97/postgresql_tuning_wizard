@@ -9,19 +9,19 @@
     <header>
         <h1>PostgreSQL Tuning Wizard</h1>
         <nav id="Progression">
-            <div class="step active">
+            <div class="step active" id="connection-step">
                 <span class="step-dot"></span>
                 <span>Connection</span>
             </div>
-            <div class="step">
+            <div class="step" id="query-step">
                 <span class="step-dot"></span>
                 <span>Query</span>
             </div>
-            <div class="step">
+            <div class="step" id="analysis-step">
                 <span class="step-dot"></span>
                 <span>Analysis</span>
             </div>
-            <div class="step">
+            <div class="step" id="recommendations-step">
                 <span class="step-dot"></span>
                 <span>Recommendations</span>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                 </form>
             </div>
-            <button type="button" id="conn-next">Next -></button>
+            <button type="button" id="connection-next">Next -></button>
         </section>
         <section id="query" hidden>
             <div id="current-connection">
