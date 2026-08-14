@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+
+from analyzer.connection import establish_connection
 
 app = Flask(__name__)
 
@@ -8,6 +10,26 @@ def wizard():
         "main.html",
         page_title = "PostgreSQL Tuning Wizard"
     )
+
+@app.route('/api/data/', methods=['POST'])
+def handle_json():
+    data = request.get_json()
+
+    db_params = {
+        "dbname": data.get('databaseName'),
+        "user": data.get('username'),
+        "password": data.get('password'),
+        "host": data.get('host'),
+        "port": data.get('port'),
+    }
+
+    if establish_connection(db_params) is not None:
+        return jsonify({
+            "status" : "connected"
+        }), 200
+    return jsonify({
+        "status": "failed"
+    }), 400
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)

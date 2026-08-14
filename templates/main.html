@@ -30,7 +30,7 @@
     <main>
         <section id="connection">
             <div id="form-bg">
-                <form>
+                <form id="connection-info">
                     <div class="form-field">
                         <label for="conn">Connection name</label>
                         <input id="conn" type="text" required>
@@ -57,7 +57,7 @@
                     </div>
                     <div id="form-actions">
                         <button type="submit" id="submit">Test connection</button>
-                        <p class="connection-status">✓ Connected</p>
+                        <p class="connection-status" id="connection-status-first-section">⨯ Disconnected</p>
                     </div>
                 </form>
             </div>
@@ -66,7 +66,7 @@
         <section id="query" hidden>
             <div id="current-connection">
                 <p>Database: tuning_wizard_test</p>
-                <p class="connection-status">Connected</p>
+                <p class="connection-status" id="connection-status-second-section">Disconnected</p>
             </div>
             <textarea id="user-query"></textarea>
             <div id="navigation">

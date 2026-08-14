@@ -5,6 +5,7 @@
     --text: #34383a;
     --border: #d6d6d2;
     --accent: #8baa20;
+    --accent-2: #ba3b46;
 
     --space-1: 8px;
     --space-2: 16px;
@@ -137,17 +138,31 @@ button{
     flex-direction: column
 }
 
-.connection-status {
+.connection-status.connected {
     color: var(--accent)
 }
 
-#query .connection-status::after{
+.connection-status.disconnected, .connection-status{
+    color: var(--accent-2)
+}
+
+#query .connection-status.connected::after{
     content: "";
     display: inline-block;
     width: 7px;
     height: 7px;
     border-radius: 50%;
     background: var(--accent);
+    margin-left: 6px;
+}
+
+#query .connection-status.disconnected::after, #query .connection-status::after{
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-2);
     margin-left: 6px;
 }
 
