@@ -69,9 +69,11 @@
                 <p class="connection-status" id="connection-status-second-section">Disconnected</p>
             </div>
             <textarea id="user-query"></textarea>
+            <input type="checkbox" id="analyze">
+            <label for="analyze">Run query to collect actual timing (EXPLAIN ANALYZE)</label>
             <div id="navigation">
                 <button id="query-back" type="button"><- Back</button>
-                <button style="width: 88px" type="button">Analyze -></button>
+                <button style="width: 88px" type="button" id="query-next">Analyze -></button>
             </div>
         </section>
         <section id="analysis" hidden></section>

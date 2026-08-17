@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 from analyzer.connection import establish_connection
+from analyzer.main import get_query_plan
 
 app = Flask(__name__)
 
@@ -30,6 +31,20 @@ def handle_json():
     return jsonify({
         "status": "failed"
     }), 400
+
+@app.route("/api/analyze/", methods=['POST'])
+def analyze_query():
+    data = request.get_json()
+
+    db_params = {
+        "dbname": data.get('databaseName'),
+        "user": data.get('username'),
+        "password": data.get('password'),
+        "host": data.get('host'),
+        "port": data.get('port'),
+    }
+
+    return jsonify(get_query_plan(db_params, data.get("query")));
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
