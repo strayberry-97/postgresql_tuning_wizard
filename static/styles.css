@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 :root {
     --bg: #f8f7f4;
     --bg-2: #f3ece7;
@@ -207,7 +207,7 @@ main{
     width: 100%;
 }
 
-#query #navigation{
+.navigation{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -221,4 +221,218 @@ textarea{
 
 section[hidden] {
     display: none !important;
+}
+
+#analysis-title {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#analysis-title *{
+    padding: 0;
+    margin: 0;
+}
+
+#analysis-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#analysis-title-1 *{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+}
+
+#analysis-title-2 *{
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+#analysis-connection{
+    background-color: #EDF4D8;
+    border: var(--accent) 1px solid;
+    padding-block: 3px;
+    padding-inline: 10px;
+    border-radius: 6px;
+}
+
+#analysis-top{
+    margin-bottom: 20px;
+}
+
+.grid-container{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.grid-item{
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    padding-inline: 16px;
+    padding-block: 12px;
+    border-radius: 10px;
+}
+
+.grid-item p{
+    padding: 0 0 4px 0;
+    margin: 0;
+    color: #9a9a96;
+    font-weight: 400;
+    font-size: 11px;
+}
+
+.grid-item span{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#execution-plan-container{
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#execution-plan-container > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+#execution-plan-container > div:first-child span:first-child {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#execution-plan-container > div:first-child span:last-child {
+    font-family: var(--font-code), monospace;
+    color: #9a9a96;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+#execution-plan-container details {
+    margin: 0;
+}
+
+#execution-plan-container summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+#execution-plan-container summary::-webkit-details-marker {
+    display: none;
+}
+
+
+.plan-node {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 44px;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    font-family: var(--font-code);
+}
+
+
+.node-name {
+    font-weight: 700;
+    text-align: left;
+    flex: 1;
+}
+
+
+.node-metrics {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 14px;
+
+    color: #999;
+    font-size: 11px;
+    font-weight: 400;
+
+    white-space: nowrap;
+}
+
+.row-count {
+    background: #dededb;
+    color: #666;
+
+    border-radius: 6px;
+
+    padding: 5px 9px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.plan-node-container:not(.leaf) > summary::before {
+    content: "▾";
+
+    display: inline-block;
+
+    width: 18px;
+
+    color: #999;
+    font-size: 12px;
+
+    margin-right: 4px;
+}
+
+
+.plan-node-container:not(.leaf):not([open]) > summary::before {
+    content: "▸";
+}
+
+
+.plan-node-container.leaf > summary::before {
+    content: "";
+
+    display: inline-block;
+
+    width: 18px;
+}
+
+.plan-children {
+    margin-left: 40px;
+}
+
+
+.plan-node-container {
+    margin: 2px 0;
+}
+
+.plan-node.warning {
+    background: #fff4df;
+    border: 1px solid #e7b84c;
+}
+
+.plan-node.warning .node-name {
+    color: #c87508;
+}
+
+.warning-count {
+    background: #e9c96b;
+    color: #765100;
 }

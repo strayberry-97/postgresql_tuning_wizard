@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 
+from analyzer.analyze_plan import analyze_plan
 from analyzer.connection import establish_connection
 from analyzer.main import get_query_plan
 
@@ -43,8 +44,10 @@ def analyze_query():
         "host": data.get('host'),
         "port": data.get('port'),
     }
-
-    return jsonify(get_query_plan(db_params, data.get("query")));
+    plan = get_query_plan(db_params, data.get("query"))
+    print(plan)
+    results = analyze_plan(plan)
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)

@@ -14,6 +14,18 @@ document.getElementById('query-next').addEventListener("click", () => {
   processQuery(query);
 })
 
+document.getElementById('analysis-next').addEventListener("click", () => {
+  changeSection('recommendations');
+})
+
+document.getElementById('analysis-back').addEventListener("click", () => {
+  changeSection('query');
+})
+
+document.getElementById('recommendations-back').addEventListener("click", () => {
+  changeSection('analysis');
+})
+
 function changeSection(sectionName) {
   let x = document.querySelectorAll("section");
   x.forEach(section => {

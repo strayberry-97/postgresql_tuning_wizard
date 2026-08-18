@@ -71,13 +71,152 @@
             <textarea id="user-query"></textarea>
             <input type="checkbox" id="analyze">
             <label for="analyze">Run query to collect actual timing (EXPLAIN ANALYZE)</label>
-            <div id="navigation">
+            <div class="navigation">
                 <button id="query-back" type="button"><- Back</button>
-                <button style="width: 88px" type="button" id="query-next">Analyze -></button>
+                <button style="width: 88px" type="button" id="query-next">Proceed -></button>
             </div>
         </section>
-        <section id="analysis" hidden></section>
-        <section id="recommendations" hidden></section>
+        <section id="analysis" hidden>
+            <div id="analysis-top">
+                <div id="analysis-title">
+                    <p id="analysis-title-1"><b>Query Analysis</b></p>
+                    <p id="analysis-title-2"><span>EXPLAIN ANALYZE</span> results for the submitted query</p>
+                </div>
+                <div id="analysis-connection">
+                    <p>Connected <span>tuning_wizard_test</span></p>
+                </div>
+            </div>
+            <div id="analysis-middle" class="grid-container">
+                <div class="grid-item">
+                    <p>Planning time</p>
+                    <span>2.4 ms</span>
+                </div>
+                <div class="grid-item">
+                    <p>Execution time</p>
+                    <span>314.1 ms</span>
+                </div>
+                <div class="grid-item">
+                    <p>Total rows</p>
+                    <span>12,400</span>
+                </div>
+                <div class="grid-item">
+                    <p>Shared buffers hit</p>
+                    <span>3,821</span>
+                </div>
+                <div class="grid-item">
+                    <p>Shared buffers read</p>
+                    <span>1,042</span>
+                </div>
+                <div class="grid-item">
+                    <p>Temp blocks written</p>
+                    <span>0</span>
+                </div>
+            </div>
+            <div id="execution-plan-container">
+                <div>
+                    <span>Execution plan</span>
+                    <span>click nodes to expand</span>
+                </div>
+                <details class="plan-node-container" open>
+                    <summary class="plan-node">
+                        <span class="node-name">Hash Join</span>
+                        <span class="node-metrics">
+                            <span>cost=0.00...4821.42</span>
+                            <span>actual 142.3..312.8 ms</span>
+                            <span class="row-count">12,400 rows</span>
+                        </span>
+                    </summary>
+
+                    <div class="plan-children">
+
+                        <details class="plan-node-container leaf">
+                            <summary class="plan-node warning">
+                                <span class="node-name">Seq Scan on orders</span>
+
+                                <span class="node-metrics">
+                                    <span>cost=0.00...1840.00</span>
+                                    <span>actual 0.1...84.2 ms</span>
+                                    <span class="row-count warning-count">80,000 rows</span>
+                                </span>
+                            </summary>
+                        </details>
+
+                        <details class="plan-node-container" open>
+                            <summary class="plan-node">
+                                <span class="node-name">Hash</span>
+
+                                <span class="node-metrics">
+                                    <span>cost=32.10...32.10</span>
+                                    <span>actual 1.2...1.2 ms</span>
+                                    <span class="row-count">1,050 rows</span>
+                                </span>
+                            </summary>
+
+                            <details class="plan-node-container leaf">
+                                <summary class="plan-node">
+                                    <span class="node-name">Index Scan on customers</span>
+
+                                    <span class="node-metrics">
+                                        <span>cost=0.29...32.10</span>
+                                        <span>actual 0.04...0.9 ms</span>
+                                        <span class="row-count">1,050 rows</span>
+                                    </span>
+                                </summary>
+                            </details>
+                        </details>
+                    </div>
+                </details>
+            </div>
+            <div>
+                <div>Icon</div>
+                <div>
+                    <p><b>Bottleneck detected: problem</b></p>
+                    <p>Explanation</p>
+                </div>
+            </div>
+            <div class="navigation">
+                <button id="analysis-back" type="button"><- Back</button>
+                <button type="button" id="analysis-next">Next -></button>
+            </div>
+        </section>
+        <section id="recommendations" hidden>
+            <h2>Recommendations</h2>
+            <h3>3 suggestions found – <span>1 high, 1 medium</span></h3>
+
+            <div>
+                <details>
+                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
+                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
+                    <code></code>
+                </details>
+            </div>
+            <div>
+                <details>
+                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
+                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
+                    <code></code>
+                </details>
+            </div>
+            <div>
+                <details>
+                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
+                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
+                    <code></code>
+                </details>
+            </div>
+            <div>
+                <div>
+                    <p>Apply all recommendations<br>
+                        Generate a migration script with all suggested changes
+                    </p>
+                </div>
+                <button>Export migration.sql</button>
+            </div>
+            <div class="navigation">
+                <button id="recommendations-back" type="button"><- Back</button>
+                <button type="button">Tune another query -></button>
+            </div>
+        </section>
     </main>
     <footer>
     <p>@strayberry</p>

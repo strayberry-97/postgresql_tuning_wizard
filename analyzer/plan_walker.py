@@ -1,11 +1,15 @@
 def walker(plan, result, level = 0):
+    print(plan);
     match plan["Node Type"]:
         case "Seq Scan":
-            if plan["Actual Rows"] > 100:
-                result.append([plan['Node Type'], level, "Seq Scan on a large amount of rows, consider using an index"])
-        case "Filter":
-            if plan["Actual Rows"] <= plan["Estimated Rows"] * 0.1:
-                result.append([plan['Node Type'], level, "Large number of rows filtered out"])
+            rows_removed = plan.get("Rows Removed by Filter", 0)
+            rows_examined = plan["Actual Rows"] + rows_removed
+
+            if rows_examined > 100000 and (rows_removed / rows_examined)>0.8:
+                result.append([
+                    plan["Node Type"],
+                    level,
+                    "Sequential scan examines many rows and filters out most of them; consider whether an index could help"])
 
     if "Plans" in plan:
         for each in plan["Plans"]:
