@@ -340,14 +340,10 @@ section[hidden] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
     min-height: 44px;
-
     padding: 6px 10px;
-
     border-radius: 8px;
-
     font-family: var(--font-code);
 }
 
@@ -363,40 +359,29 @@ section[hidden] {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     gap: 14px;
-
     color: #999;
     font-size: 11px;
     font-weight: 400;
-
     white-space: nowrap;
 }
 
 .row-count {
     background: #dededb;
     color: #666;
-
     border-radius: 6px;
-
     padding: 5px 9px;
-
     font-size: 12px;
     font-weight: 500;
-
     white-space: nowrap;
 }
 
 .plan-node-container:not(.leaf) > summary::before {
     content: "▾";
-
     display: inline-block;
-
     width: 18px;
-
     color: #999;
     font-size: 12px;
-
     margin-right: 4px;
 }
 
@@ -408,9 +393,7 @@ section[hidden] {
 
 .plan-node-container.leaf > summary::before {
     content: "";
-
     display: inline-block;
-
     width: 18px;
 }
 

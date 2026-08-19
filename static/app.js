@@ -109,6 +109,15 @@ async function handleForm(event) {
 }
 form.addEventListener('submit', handleForm);
 
+function populateAnalysis(information){
+    document.getElementById('planning_time').innerText = information['Planning Time'] + ' ms';
+    document.getElementById('execution_time').innerText = information['Execution Time'] + ' ms';
+    document.getElementById('total_rows').innerText = information['Total Rows'].toLocaleString('en-US');
+    document.getElementById('shared_buffers_hit').innerText = information['Shared Buffers Hit'].toLocaleString('en-US');
+    document.getElementById('shared_buffers_read').innerText = information['Shared Buffers Read'].toLocaleString('en-US');
+    document.getElementById('temp_blocks_written').innerText = information['Temp Blocks Written'].toLocaleString('en-US');
+}
+
 async function processQuery(query){
     let connectionInformation = {
         connectionName : document.getElementById("conn").value,
@@ -135,7 +144,8 @@ async function processQuery(query){
         //read flask's answer
         const result = await response.json();
 
-        console.log(result);
+        populateAnalysis(result);
+
     } catch (error) {
         console.error(error.message);
     }
