@@ -118,6 +118,63 @@ function populateAnalysis(information){
     document.getElementById('temp_blocks_written').innerText = information['Temp Blocks Written'].toLocaleString('en-US');
 }
 
+function createPlanNode(node){
+
+    let details = document.createElement('details');
+    details.classList.add('plan-node-container');
+
+
+
+    let summary = document.createElement('summary');
+    summary.classList.add('plan-node');
+    let nodeName = document.createElement('span');
+    nodeName.classList.add('node-name');
+    nodeName.innerText = node['Node Type'];
+
+    let nodeMetrics = document.createElement('span');
+    nodeMetrics.classList.add('node-metrics');
+
+    let met1 = document.createElement('span');
+    met1.innerText = 'cost='+node["Startup Cost"]+'..'+node["Total Cost"];
+    let met2 = document.createElement('span');
+    met2.innerText = 'time='+node["Actual Startup Time"]+'..'+node["Actual Total Time"]+" ms";
+    let met3 = document.createElement('span');
+    met3.classList.add('row-count');
+    met3.innerText = node['Actual Rows']+' rows';
+
+    nodeMetrics.appendChild(met1);
+    nodeMetrics.appendChild(met2);
+    nodeMetrics.appendChild(met3);
+
+    summary.appendChild(nodeName);
+    summary.appendChild(nodeMetrics);
+
+    details.appendChild(summary);
+
+    let child;
+    if(node['Children'].length > 0){
+        details.open = true;
+        child = document.createElement('div');
+        child.classList.add('plan-children');
+        node['Children'].forEach(y =>{
+            child.appendChild(
+                createPlanNode(y)
+            );
+        })
+        details.appendChild(child);
+    }else{
+        details.classList.add('leaf');
+    }
+
+    return details;
+}
+
+function fillExecutionPlan(result){
+    document.getElementById("execution-plan").appendChild(
+        createPlanNode(result['Plan'])
+    );
+}
+
 async function processQuery(query){
     let connectionInformation = {
         connectionName : document.getElementById("conn").value,
@@ -145,6 +202,7 @@ async function processQuery(query){
         const result = await response.json();
 
         populateAnalysis(result);
+        fillExecutionPlan(result);
 
     } catch (error) {
         console.error(error.message);

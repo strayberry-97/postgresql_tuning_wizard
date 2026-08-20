@@ -9,9 +9,9 @@ def analyze_plan(plan):
         "Shared Buffers Read" : plan["Plan"]["Shared Read Blocks"],
         "Temp Blocks Written" : plan["Plan"]["Temp Written Blocks"],
         "Total Rows" : plan["Plan"]['Actual Rows'],
-        "Analysis" : []
+        "Plan" : []
     }
 
 
-    walker(plan['Plan'], result)
+    result["Plan"] = walker(plan['Plan'], 0)
     return result
