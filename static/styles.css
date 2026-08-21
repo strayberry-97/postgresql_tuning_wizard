@@ -255,13 +255,53 @@ section[hidden] {
 #analysis-connection{
     background-color: #EDF4D8;
     border: var(--accent) 1px solid;
-    padding-block: 3px;
+    padding-block: 4px;
     padding-inline: 10px;
     border-radius: 6px;
+    height: 26px;
+}
+
+#analysis-connection p {
+    margin: 0;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+#analysis-connection p::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+#analysis-connection span{
+    color: var(--accent);
+    font-size: 12px;
+    position: relative;
+    padding-left: 7px;
+    font-family: var(--font-code), monospace;
+}
+
+#analysis-connection span::before{
+    content: "";
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #analysis-top{
-    margin-bottom: 20px;
+    margin-block: 20px;
 }
 
 .grid-container{
@@ -310,8 +350,8 @@ section[hidden] {
 }
 
 #execution-plan-container > div:first-child span:first-child {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 #execution-plan-container > div:first-child span:last-child {
@@ -319,7 +359,10 @@ section[hidden] {
     color: #9a9a96;
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 400;
+    background-color: #f8f7f4;
 }
 
 #execution-plan-container details {
@@ -341,15 +384,16 @@ section[hidden] {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    min-height: 44px;
-    padding: 6px 10px;
+    min-height: 36px;
+    padding: 0;
     border-radius: 8px;
-    font-family: var(--font-code);
 }
 
 
 .node-name {
-    font-weight: 700;
+    font-family: var(--font-code), monospace;
+    font-weight: 500;
+    font-size: 12px;
     text-align: left;
     flex: 1;
 }
@@ -361,9 +405,14 @@ section[hidden] {
     justify-content: flex-end;
     gap: 14px;
     color: #999;
+    white-space: nowrap;
+}
+
+.node-metrics span{
+    font-family: var(--font-code), monospace;
     font-size: 11px;
     font-weight: 400;
-    white-space: nowrap;
+    color: #9a9a96;
 }
 
 .row-count {
@@ -418,4 +467,8 @@ section[hidden] {
 .warning-count {
     background: #e9c96b;
     color: #765100;
+}
+
+#analysis{
+    width: 685px;
 }
