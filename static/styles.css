@@ -472,3 +472,35 @@ section[hidden] {
 #analysis{
     width: 685px;
 }
+
+#analysis-mode-selection{
+    margin-block: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#analysis-mode-selection span{
+    font-family: var(--font-ui), sans-serif;
+    color: #7a7a76;
+    font-weight: 400;
+    font-size: 13px;
+    align-content: center;
+}
+
+#analysis-mode-buttons{
+    gap: 2px;
+    padding: 3px;
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+#analysis-mode-explain-analyze{
+    width: 145px;
+}
+
+button.not-active{
+    background-color: var(--bg-2);
+    color: #7a7a76;
+}

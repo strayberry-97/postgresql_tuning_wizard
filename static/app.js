@@ -26,6 +26,31 @@ document.getElementById('recommendations-back').addEventListener("click", () => 
   changeSection('analysis');
 })
 
+document.getElementById('analysis-mode-explain').addEventListener("click", () => {
+    changeButtonState('analysis-mode-explain');
+})
+
+document.getElementById('analysis-mode-explain-analyze').addEventListener("click", () => {
+    changeButtonState('analysis-mode-explain-analyze');
+})
+
+function changeButtonState(buttonID) {
+    let currentButton = document.getElementById(buttonID);
+    let anotherButton;
+    if(buttonID === 'analysis-mode-explain'){
+        anotherButton = document.getElementById('analysis-mode-explain-analyze');
+    }else{
+        anotherButton = document.getElementById('analysis-mode-explain');
+    }
+    if(currentButton.classList.contains('not-active')){
+        currentButton.classList.remove('not-active');
+        anotherButton.classList.add('not-active');
+    }else{
+        currentButton.classList.add('not-active');
+        anotherButton.classList.remove('not-active');
+    }
+}
+
 function changeSection(sectionName) {
   let x = document.querySelectorAll("section");
   x.forEach(section => {
