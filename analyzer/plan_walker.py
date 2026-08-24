@@ -42,6 +42,7 @@ def walker(plan, type,  level = 0):
             "Node Type": plan["Node Type"],
             "Startup Cost": plan["Startup Cost"],
             "Total Cost": plan["Total Cost"],
+            "Estimated Rows" : plan['Plan Rows'],
             "Level": level,
             "Children": [],
             "Problems": []

@@ -139,14 +139,40 @@ async function handleForm(event) {
 }
 form.addEventListener('submit', handleForm);
 
-function populateAnalysis(information){
-    document.getElementById('planning_time').innerText = information['Planning Time'] + ' ms';
-    document.getElementById('execution_time').innerText = information['Execution Time'] + ' ms';
-    document.getElementById('total_rows').innerText = information['Total Rows'].toLocaleString('en-US');
-    document.getElementById('shared_buffers_hit').innerText = information['Shared Buffers Hit'].toLocaleString('en-US');
-    document.getElementById('shared_buffers_read').innerText = information['Shared Buffers Read'].toLocaleString('en-US');
-    document.getElementById('temp_blocks_written').innerText = information['Temp Blocks Written'].toLocaleString('en-US');
-}
+function populateAnalysis(information, type){
+    if(type === 'explain analyze'){
+        document.getElementById('grid-item-4').hidden = false;
+        document.getElementById('grid-item-5').hidden = false;
+        document.getElementById('grid-item-6').hidden = false;
+
+        document.getElementById('grid-item-1').querySelector('p').innerText = 'Planning Time';
+        document.getElementById('planning_time').innerText = information['Planning Time'] + ' ms';
+
+        document.getElementById('grid-item-2').querySelector('p').innerText = 'Execution Time';
+        document.getElementById('execution_time').innerText = information['Execution Time'] + ' ms';
+
+        document.getElementById('grid-item-3').querySelector('p').innerText = 'Total Rows';
+        document.getElementById('total_rows').innerText = information['Total Rows'].toLocaleString('en-US');
+
+        document.getElementById('shared_buffers_hit').innerText = information['Shared Buffers Hit'].toLocaleString('en-US');
+        document.getElementById('shared_buffers_read').innerText = information['Shared Buffers Read'].toLocaleString('en-US');
+        document.getElementById('temp_blocks_written').innerText = information['Temp Blocks Written'].toLocaleString('en-US');
+    }else{
+        document.getElementById('grid-item-4').hidden = true;
+        document.getElementById('grid-item-5').hidden = true;
+        document.getElementById('grid-item-6').hidden = true;
+
+        document.getElementById('grid-item-1').querySelector('p').innerText = 'Startup cost';
+        document.getElementById('grid-item-1').querySelector('span').innerText = information['Plan']['Startup Cost'];
+
+        document.getElementById('grid-item-2').querySelector('p').innerText = 'Total cost';
+        document.getElementById('grid-item-2').querySelector('span').innerText = information['Plan']['Total Cost'];
+
+        document.getElementById('grid-item-3').querySelector('p').innerText = 'Estimated rows';
+        document.getElementById('grid-item-3').querySelector('span').innerText = information['Plan']['Estimated Rows'];
+
+    }
+    }
 
 function createPlanNode(node){
 
@@ -157,6 +183,7 @@ function createPlanNode(node){
 
     let summary = document.createElement('summary');
     summary.classList.add('plan-node');
+
     let nodeName = document.createElement('span');
     nodeName.classList.add('node-name');
     nodeName.innerText = node['Node Type'];
@@ -166,20 +193,36 @@ function createPlanNode(node){
 
     let met1 = document.createElement('span');
     met1.innerText = 'cost='+node["Startup Cost"]+'..'+node["Total Cost"];
-    let met2 = document.createElement('span');
-    met2.innerText = 'time='+node["Actual Startup Time"]+'..'+node["Actual Total Time"]+" ms";
-    let met3 = document.createElement('span');
-    met3.classList.add('row-count');
-    met3.innerText = node['Actual Rows']+' rows';
+
+    let met3;
+
+    if(document.getElementById('grid-item-4').hidden !== true){
+        let met2 = document.createElement('span');
+        met2.innerText = 'time='+node["Actual Startup Time"]+'..'+node["Actual Total Time"]+" ms";
+        met3 = document.createElement('span');
+        met3.classList.add('row-count');
+        met3.innerText = node['Actual Rows']+' rows';
+        nodeMetrics.appendChild(met2);
+    }else{
+        met3 = document.createElement('span');
+        met3.classList.add('row-count');
+        met3.innerText = node['Estimated Rows']+' rows';
+    }
 
     nodeMetrics.appendChild(met1);
-    nodeMetrics.appendChild(met2);
     nodeMetrics.appendChild(met3);
+
+    if((node['Problems']?? []).length > 0){
+        summary.classList.add('warning');
+        met3.classList.add('warning-count')
+    }
 
     summary.appendChild(nodeName);
     summary.appendChild(nodeMetrics);
 
     details.appendChild(summary);
+
+
 
     let child;
     if(node['Children'].length > 0){
@@ -238,9 +281,7 @@ async function processQuery(query, type){
 
         console.log("ANALYSIS RESULT:", result);
 
-        if(type === 'explain analyze'){
-            populateAnalysis(result);
-        }
+        populateAnalysis(result, type);
 
         fillExecutionPlan(result);
 

@@ -92,27 +92,27 @@
                 </div>
             </div>
             <div id="analysis-middle" class="grid-container">
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-1">
                     <p>Planning time</p>
                     <span id="planning_time">2.4 ms</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-2">
                     <p>Execution time</p>
                     <span id="execution_time">314.1 ms</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-3">
                     <p>Total rows</p>
                     <span id="total_rows">12,400</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-4">
                     <p>Shared buffers hit</p>
                     <span id="shared_buffers_hit">3,821</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-5">
                     <p>Shared buffers read</p>
                     <span id="shared_buffers_read">1,042</span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="grid-item-6">
                     <p>Temp blocks written</p>
                     <span id="temp_blocks_written">0</span>
                 </div>
@@ -124,11 +124,11 @@
                 </div>
                 <div id="execution-plan"></div>
             </div>
-            <div>
+            <div id="analysis-bottom">
                 <div>Icon</div>
-                <div>
-                    <p><b>Bottleneck detected: problem</b></p>
-                    <p>Explanation</p>
+                <div id="analysis-problem">
+                    <p><b>Bottleneck detected: </b><span id="problem-name"></span></p>
+                    <p id="problem-explanation"></p>
                 </div>
             </div>
             <div class="navigation">
