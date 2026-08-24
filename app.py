@@ -36,6 +36,7 @@ def handle_json():
 @app.route("/api/analyze/", methods=['POST'])
 def analyze_query():
     data = request.get_json()
+    query_type = data.get('type')
 
     db_params = {
         "dbname": data.get('databaseName'),
@@ -44,9 +45,9 @@ def analyze_query():
         "host": data.get('host'),
         "port": data.get('port'),
     }
-    plan = get_query_plan(db_params, data.get("query"))
+    plan = get_query_plan(db_params, data.get("query"), query_type)
     print(plan)
-    results = analyze_plan(plan)
+    results = analyze_plan(plan, query_type)
     return jsonify(results)
 
 if __name__ == "__main__":

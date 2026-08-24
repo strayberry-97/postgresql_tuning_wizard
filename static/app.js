@@ -11,7 +11,12 @@ document.getElementById('query-back').addEventListener("click", () => {
 document.getElementById('query-next').addEventListener("click", () => {
   changeSection('analysis');
   let query = document.getElementById("user-query").value.trim();
-  processQuery(query);
+  let type = document.getElementById("analysis-mode-explain");
+  if(type.classList.contains('not-active'))
+      type = 'explain analyze';
+  else
+    type = 'explain';
+  processQuery(query, type);
 })
 
 document.getElementById('analysis-next').addEventListener("click", () => {
@@ -195,12 +200,16 @@ function createPlanNode(node){
 }
 
 function fillExecutionPlan(result){
-    document.getElementById("execution-plan").appendChild(
+    const container = document.getElementById("execution-plan");
+
+    container.innerHTML = '';
+
+    container.appendChild(
         createPlanNode(result['Plan'])
     );
 }
 
-async function processQuery(query){
+async function processQuery(query, type){
     let connectionInformation = {
         connectionName : document.getElementById("conn").value,
         host : document.getElementById("host").value,
@@ -208,7 +217,8 @@ async function processQuery(query){
         databaseName : document.getElementById("db").value,
         username : document.getElementById("username").value,
         password : document.getElementById("pass").value,
-        query : query
+        query : query,
+        type : type
     };
 
     let options = {
@@ -226,7 +236,12 @@ async function processQuery(query){
         //read flask's answer
         const result = await response.json();
 
-        populateAnalysis(result);
+        console.log("ANALYSIS RESULT:", result);
+
+        if(type === 'explain analyze'){
+            populateAnalysis(result);
+        }
+
         fillExecutionPlan(result);
 
     } catch (error) {
