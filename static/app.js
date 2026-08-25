@@ -214,7 +214,15 @@ function createPlanNode(node){
 
     if((node['Problems']?? []).length > 0){
         summary.classList.add('warning');
-        met3.classList.add('warning-count')
+        met3.classList.add('warning-count');
+        node['Problems'].forEach(x=>{
+            if(x['Severity'] === 'High'){
+                document.getElementById('problem-name').innerText = node['Node Type'];
+                document.getElementById('problem-explanation').innerText = x['Sign']
+        }
+        })
+
+
     }
 
     summary.appendChild(nodeName);
