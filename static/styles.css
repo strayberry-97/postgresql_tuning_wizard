@@ -542,3 +542,143 @@ button.not-active{
 #analysis-problem p{
     margin: 0;
 }
+
+#recommendations{
+    width: 685px;
+}
+
+#recommendations h2{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#recommendations p{
+    padding: 4px 0 0 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #7A7A76;
+}
+
+#recommendations > div{
+    margin-bottom: 10px;
+}
+
+#recommendations details{
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#recommendations summary{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+}
+
+#recommendations summary::-webkit-details-marker{
+    display: none;
+}
+
+#recommendations summary::after {
+    content: "▸";
+    margin-left: auto;
+    color: #9a9a96;
+    font-size: 12px;
+}
+
+#recommendations summary span{
+    font-family: var(--font-code), monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 7px;
+    border-radius: 5px;
+    background-color: #fff0d5;
+    color: #9a6200;
+    flex-shrink: 0;
+}
+
+#recommendations summary b{
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#recommendations details > p {
+    margin: 0;
+    padding: 0 14px 12px;
+    color: #686864;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+#recommendations details > code{
+    display: block;
+    margin: 0 14px 14px;
+    padding: 10px 12px;
+    background-color: #e9e3de;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-family: var(--font-code), monospace;
+    font-size: 11px;
+    line-height: 17px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+#recommendations > div:last-of-type{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding: 14px 0;
+    background-color: transparent;
+    border-top: 1px solid var(--border);
+}
+
+#recommendations > div:last-of-type p{
+    margin: 0;
+    font-size: 12px;
+    line-height: 17px;
+    color: #7a7a76;
+}
+
+#recommendations > div:last-of-type p:first-line{
+    width: auto;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+#recommendations .navigation{
+    margin-top: 8px;
+}
+
+#tune-another-query{
+    width: 156px;
+    background-color: var(--bg);
+    border: 1px solid #D6D6D2;
+    color: #34383A;
+}
+
+#script-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#export-button{
+    width: 161px;
+    background-color: #8baa20;
+    color: #ffffff;
+    font-size: 13px;
+    padding-block: 6px;
+    height: 32px;
+}
+
+#recommendations summary:focus{
+    outline: none;
+}

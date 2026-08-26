@@ -39,6 +39,11 @@ document.getElementById('analysis-mode-explain-analyze').addEventListener("click
     changeButtonState('analysis-mode-explain-analyze');
 })
 
+document.getElementById('tune-another-query').addEventListener("click", () =>{
+    document.getElementById("user-query").value = '';
+    changeSection('query');
+})
+
 function changeButtonState(buttonID) {
     let currentButton = document.getElementById(buttonID);
     let anotherButton;
@@ -260,6 +265,69 @@ function fillExecutionPlan(result){
     );
 }
 
+function populateRecommendations(result){
+    const container = document.getElementById("recommendations-container");
+    const summary = document.getElementById('recommendations-summary');
+
+    container.innerHTML = '';
+
+    let recommendations = [];
+
+    function collectProblems(node) {
+        if (node['Problems'] && node['Problems'].length > 0) {
+            node['Problems'].forEach(problem => {
+                recommendations.push({
+                    nodeType: node['Node Type'],
+                    severity: problem["Severity"],
+                    sign: problem['Sign'],
+                    recommendation: problem['Recommendations']
+                });
+            });
+        }
+
+        if (node['Children']) {
+            node['Children'].forEach(child => {
+                collectProblems(child);
+            });
+        }
+    }
+
+    collectProblems(result['Plan']);
+
+    let high = recommendations.filter(x => x.severity === "High").length;
+    let medium = recommendations.filter(x => x.severity === "Medium").length;
+    let low = recommendations.filter(x => x.severity === "Low").length;
+
+    summary.innerText =
+        `${recommendations.length} suggestions found – ` +
+        `${high} high, ${medium} medium, ${low} low`;
+
+    recommendations.forEach(recommendation =>{
+        const wrapper = document.createElement('div');
+        const details = document.createElement('details');
+        const summaryElement = document.createElement('summary');
+
+        const severity = document.createElement('span');
+        severity.innerText = recommendation.severity.toLocaleUpperCase();
+
+        const title = document.createElement('b');
+        title.innerText = `${recommendation.recommendation} (${recommendation.nodeType})`;
+
+        summaryElement.appendChild(severity);
+        summaryElement.appendChild(title);
+
+        const explanation = document.createElement('p');
+        explanation.innerText = recommendation.sign;
+
+        details.appendChild(summaryElement);
+        details.appendChild(explanation);
+
+        wrapper.appendChild(details);
+        container.appendChild(wrapper);
+
+    });
+}
+
 async function processQuery(query, type){
     let connectionInformation = {
         connectionName : document.getElementById("conn").value,
@@ -292,6 +360,8 @@ async function processQuery(query, type){
         populateAnalysis(result, type);
 
         fillExecutionPlan(result);
+
+        populateRecommendations(result);
 
     } catch (error) {
         console.error(error.message);

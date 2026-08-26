@@ -138,40 +138,22 @@
         </section>
         <section id="recommendations" hidden>
             <h2>Recommendations</h2>
-            <h3>3 suggestions found – <span>1 high, 1 medium</span></h3>
+            <p id="recommendations-summary"></p>
 
-            <div>
-                <details>
-                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
-                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
-                    <code></code>
-                </details>
-            </div>
-            <div>
-                <details>
-                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
-                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
-                    <code></code>
-                </details>
-            </div>
-            <div>
-                <details>
-                    <summary><span>HIGH</span><b>Missing index on orders.customer_id</b></summary>
-                    <p>A sequential scan over orders (80,000 rows) is the dominant cost node at 84 ms. Adding a B-tree index on customer_id will convert this to an index scan, reducing execution time by an estimated 60–75%.</p>
-                    <code></code>
-                </details>
-            </div>
-            <div>
+            <div id="recommendations-container"></div>
+
+            <div id="script-container">
                 <div>
-                    <p>Apply all recommendations<br>
+                    <p id="script-title">Apply all recommendations</p>
+                    <p id="script-description">
                         Generate a migration script with all suggested changes
                     </p>
                 </div>
-                <button>Export migration.sql</button>
+                <button id="export-button">Export migration.sql</button>
             </div>
             <div class="navigation">
                 <button id="recommendations-back" type="button"><- Back</button>
-                <button type="button">Tune another query -></button>
+                <button id='tune-another-query' type="button">Tune another query</button>
             </div>
         </section>
     </main>
