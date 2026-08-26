@@ -507,9 +507,38 @@ button.not-active{
 #analysis-bottom{
     display: flex;
     flex-direction: row;
+    gap: 12px;
+    background-color: #fdf5ec;
+    border: 1px solid #E8C97A;
+    border-radius: 10px;
+    padding-block: 14px;
+    padding-inline: 18px;
 }
 
 #analysis-problem{
     display: flex;
     flex-direction: column;
+}
+
+#analysis-problem p:first-child{
+    font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+
+#analysis-bottom *{
+    color: #7A5000;
+}
+
+.analysis-problem-icon{
+    color: #34383a;
+    flex-shrink: 0;
+}
+
+.analysis-problem-icon svg{
+    width: 18px;
+}
+
+#analysis-problem p{
+    margin: 0;
 }
