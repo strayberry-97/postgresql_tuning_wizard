@@ -13,11 +13,18 @@ def walker(plan, type,  level = 0):
 
         }
 
-        #if plan['Plan Rows'] / node['Actual Rows'] > 0.8:
-        #   node["Problems"].append({
-        #        "Sign": "Significant difference between actual and plan rows",
-        #        "Recommendation": "Consider running ANALYSE to update statistics"
-        #    })
+        estimated_rows = plan.get('Plan Rows', 0)
+        actual_rows = plan.get('Actual Rows', 0)
+
+        if estimated_rows > 0 and actual_rows > 0:
+            ratio = max(estimated_rows, actual_rows) / min(estimated_rows, actual_rows)
+
+            if ratio >= 10:
+                node['Problems'].append({
+                    "Severity" : "High",
+                    "Sign" : f"Estimated rows ({estimated_rows}) differ significantly from actual rows ({actual_rows})",
+                    "Recommendations" : "Statistics might be inaccurate, consider running ANALYZE to update them"
+                })
 
         match plan["Node Type"]:
             case "Seq Scan":
@@ -27,7 +34,7 @@ def walker(plan, type,  level = 0):
                 if rows_examined > 100000 and (rows_removed / rows_examined)>0.8:
                     node["Problems"].append({
                         "Sign" : "Sequential scan examines many rows and filters out most of them",
-                        "Recommendations" :"Consider whether an index should be used",
+                        "Recommendations" :"Consider whether an index should be used on the columns used by the filter condition",
                         "Severity": "High"
                     })
             case "Nested Loop":
@@ -36,8 +43,8 @@ def walker(plan, type,  level = 0):
                 if outer_child['Actual Rows'] > 1000 and "Scan" in inner_child['Node Type'] and inner_child['Actual Loops'] * inner_child['Actual Rows'] > 100000:
                     node["Problems"].append({
                         "Sign": "Nested Loop repeatedly executes an inner scan for many outer rows",
-                        "Recommendations": "Consider adding an index on inner relation's join/filter columns or whether a different join strategy would be more efficient",
-                        "Severity" : "High"
+                        "Recommendations": "Consider adding an index on inner relation's join or filter columns or whether a different join strategy would be more efficient",
+                        "Severity" : "Medium"
                     })
     else:
         node = {

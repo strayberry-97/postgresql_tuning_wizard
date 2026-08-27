@@ -294,6 +294,17 @@ function populateRecommendations(result){
 
     collectProblems(result['Plan']);
 
+    if (result['SQL Recommendations']) {
+        result['SQL Recommendations'].forEach(problem =>{
+            recommendations.push({
+                nodeType: "SQL",
+                severity: problem['Severity'],
+                sign: problem['Sign'],
+                recommendation: problem['Recommendations']
+            });
+        });
+    }
+
     let high = recommendations.filter(x => x.severity === "High").length;
     let medium = recommendations.filter(x => x.severity === "Medium").length;
     let low = recommendations.filter(x => x.severity === "Low").length;

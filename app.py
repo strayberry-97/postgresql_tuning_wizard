@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from analyzer.analyze_plan import analyze_plan
 from analyzer.connection import establish_connection
 from analyzer.main import get_query_plan
+from analyzer.sql_analyzer import analyze_sql
 
 app = Flask(__name__)
 
@@ -46,8 +47,12 @@ def analyze_query():
         "port": data.get('port'),
     }
     plan = get_query_plan(db_params, data.get("query"), query_type)
-    print(plan)
+
     results = analyze_plan(plan, query_type)
+
+    sql_recommendations = analyze_sql(data.get('query'))
+
+    results['SQL Recommendations'] = sql_recommendations
     return jsonify(results)
 
 if __name__ == "__main__":
